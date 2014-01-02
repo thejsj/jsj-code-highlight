@@ -1,3 +1,3 @@
-# JSJ Code Highlight
+= JSJ Code Highlight =
 
 This is a plugin.
