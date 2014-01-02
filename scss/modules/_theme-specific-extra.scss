@@ -1,0 +1,66 @@
+/*
+ * Only include these CSS rules if specified 
+ * by the user in the WP Options.
+ *
+ */
+body.jsj_code_highlight-include_additional_styles {
+
+	// Solarized Dark
+
+	&.jsj_code_highlight-solarized_dark .jsj_code_highlight-container {
+
+		background: #002b36 url('../images/noise.png') repeat;
+
+		.gutter {
+			background: rgba(255,255,255,0.08); 
+			text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+			@include box-shadow(rgba(0,0,0,0.25) 0px 0px 10px);
+		}
+
+	}
+
+	// Github
+
+	&.jsj_code_highlight-github .jsj_code_highlight-container {
+
+		background: #f8f8ff url('../images/noise.png') repeat;
+		@include box-shadow(rgba(0,0,0,0.18) 0px 0px 2px);
+
+		.gutter {
+			color: #BEBEBE; 
+			background: rgba(255,255,255,0.08); 
+			text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+			@include box-shadow(rgba(0,0,0,0.25) 0px 0px 10px);
+		}
+	}
+
+	// Tomorrow
+
+	&.jsj_code_highlight-tomorrow .jsj_code_highlight-container {
+
+		background: #F5F9FC url('../images/noise.png') repeat;
+		@include box-shadow(rgba(0,0,0,0.18) 0px 0px 2px);
+
+		.gutter {
+			color: #A5A5A5; 
+			background: rgba(255,255,255,0.08); 
+			text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+			@include box-shadow(rgba(0,0,0,0.25) 0px 0px 10px);
+		}
+	}
+
+	// Monokai Sublime
+
+	&.jsj_code_highlight-monokai_sublime .jsj_code_highlight-container {
+
+		background: #23241f url('../images/noise.png') repeat;
+		@include box-shadow(rgba(0,0,0,0.6) 0px 0px 3px);
+
+		.gutter {
+			background: rgba(255,255,255,0.08); 
+			text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+			@include box-shadow(rgba(0,0,0,0.25) 0px 0px 10px);
+		}
+	}
+
+}

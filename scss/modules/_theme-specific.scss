@@ -1,0 +1,40 @@
+/*
+ * Instead of adding these CSS rules
+ * to the <pre> element, add them
+ * to the container specified by the
+ * plugin, in order to avoid conflicts
+ * and support both line numbers and 
+ * lack of line numbers.
+ *
+ */
+body {
+
+	// Solarized Dark
+
+	&.jsj_code_highlight-solarized_dark .jsj_code_highlight-container {
+		color: #839496;
+		background: #002b36;
+	}
+
+	// Github
+
+	&.jsj_code_highlight-github .jsj_code_highlight-container {
+		color: #333;
+		background: #f8f8ff;
+	}
+
+	// Tomorrow
+
+	&.jsj_code_highlight-tomorrow .jsj_code_highlight-container {
+		color: #4d4d4c;
+		background: #F5F9FC;
+	}
+
+	// Monokai Sublime
+
+	&.jsj_code_highlight-monokai_sublime .jsj_code_highlight-container {
+		color: #839496;
+		background: #23241f;
+	}
+
+}

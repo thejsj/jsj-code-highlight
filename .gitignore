@@ -1,0 +1,16 @@
+# Ignore Sass Cache
+.sass-cache/
+
+# Photoshop Files
+*.psd
+
+# Ignore OS generated files 
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+!README.md

@@ -1,0 +1,27 @@
+/* Font Family - Based on Body Class */ 
+/* Web Safe Font Family - Copied over form Octopress - http://octopress.org/ */
+
+body.jsj_code_highlight-source_code_pro .jsj_code_highlight-container pre,
+body.jsj_code_highlight-source_code_pro .jsj_code_highlight-container pre code {
+	font-family: 'Source Code Pro', Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+}
+
+body.jsj_code_highlight-inconsolta .jsj_code_highlight-container pre,
+body.jsj_code_highlight-inconsolta .jsj_code_highlight-container pre code {
+	font-family: 'Inconsolata', Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+}
+
+body.jsj_code_highlight-droid_sans_mono .jsj_code_highlight-container pre,
+body.jsj_code_highlight-droid_sans_mono .jsj_code_highlight-container pre code {
+	font-family: 'Droid Sans Mono', Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+}
+
+body.jsj_code_highlight-deja_vu_sans_mono .jsj_code_highlight-container pre,
+body.jsj_code_highlight-deja_vu_sans_mono .jsj_code_highlight-container pre code {
+	font-family: 'DejaVuSansMono', Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+}
+
+body.jsj_code_highlight-web_fonts .jsj_code_highlight-container pre,
+body.jsj_code_highlight-web_fonts .jsj_code_highlight-container pre code {
+	font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
+}
