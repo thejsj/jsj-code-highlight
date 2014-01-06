@@ -3,49 +3,29 @@
  * @package JSJ_Code_Highlight
  * @version 0.1
  */
-/*
+
+/* * * * * * * * *
+
 Plugin Name: JSJ Code Hightlight
 Plugin URI: http://thejsj.com
 Description: This plugin Blabh blah blah
 Author: Jorge Silva Jetter
 Version: 0.1
 Author URI: http://thejsj.com
-*/
+
+ * * * * * * * * */
 
 /* 
 
-If Line Number are not being included, add correct classes to DOM. 
+TODO : If Line Number are not being included, add correct classes to DOM. 
 
-Add CSS for no line numbers
+TODO : Add CSS for no line numbers
 
-
-
-Add Credits ... anything else? 
+TODO : Add Credits ... anything else? 
 
 */
 
 $jsj_code_highlight = new JSJCodeHighlight();
-
-// Init Set All Plugin Variables
-add_action('init', array($jsj_code_highlight, 'init') );
-
-// Call register settings function
-add_action( 'admin_init', array($jsj_code_highlight, 'register_settings') );
-
-// Add JS scripts
-add_action( 'wp_enqueue_scripts', array($jsj_code_highlight, 'queque_scripts') );
-
-// Add CSS For Admin
-add_action( 'admin_enqueue_scripts', array($jsj_code_highlight, 'admin_queque_scripts') );
-
-// Hook for adding admin menus
-add_action('admin_menu',  array($jsj_code_highlight, 'add_menu_page'));
-
-// Add JS code to the Footer   
-add_action('wp_footer', array($jsj_code_highlight, 'footer_actions'), 30); //Enqueued scripts are executed at priority level 20.\
-
-// Add Body Class For Several User Settings
-add_filter('body_class',array($jsj_code_highlight, 'body_class'));
 
 class JSJCodeHighlight {
 
@@ -104,13 +84,35 @@ class JSJCodeHighlight {
 	);
 
 	/**
-	 * Populate a couple of variables in the 
+	 * Populate a couple of variables and hook all wordpress actions and filters
 	 * 
 	 * @return void
 	 */
 	public function __construct(){
+
 		$this->all_fonts['deja_vu_sans_mono']['url'] = plugins_url( 'css/dejavu-sans-mono.css' , __FILE__ );
 		$this->settings_name_space = $this->name_space . '-settings';
+
+		// Init Set All Plugin Variables
+		add_action('init', array($this, 'init') );
+
+		// Call register settings function
+		add_action( 'admin_init', array($this, 'register_settings') );
+
+		// Add JS scripts
+		add_action( 'wp_enqueue_scripts', array($this, 'queque_scripts') );
+
+		// Add CSS For Admin
+		add_action( 'admin_enqueue_scripts', array($this, 'admin_queque_scripts') );
+
+		// Hook for adding admin menus
+		add_action('admin_menu',  array($this, 'add_menu_page'));
+
+		// Add JS code to the Footer   
+		add_action('wp_footer', array($this, 'footer_actions'), 30); //Enqueued scripts are executed at priority level 20.\
+
+		// Add Body Class For Several User Settings
+		add_filter('body_class',array($this, 'body_class'));
 	}
 
 	/**
@@ -126,6 +128,10 @@ class JSJCodeHighlight {
 
 		// Populate All Options
 		$this->settings = $jsj_code_highlight_options;
+		
+		// Add Filter To Add More Settings
+		$this->settings = apply_filters( $this->name_space . '/append_settings', $this->settings );
+
 		foreach($this->settings as $key => $setting){
 			// Set Setting Name Space
 			$this->settings[$key]->name_space = $this->name_space . '-' . $setting->name;
@@ -162,7 +168,7 @@ class JSJCodeHighlight {
 		add_options_page(__( 'JSJ Code Highlight Options', 'jsj_code_highlight' ), 'JSJ Code Highlight', 'manage_options', $this->name_space, array($this, 'options_page'));
 	}
 
-	/*
+	/**
 	 * Queue scripts
 	 * 
 	 * @return void
@@ -201,7 +207,7 @@ class JSJCodeHighlight {
 		}
 	}
 
-	/*
+	/**
 	 * Queue styles for admin page
 	 * 
 	 * @return void
@@ -213,7 +219,7 @@ class JSJCodeHighlight {
 		);
 	}
 
-	/*
+	/**
 	 * Add a body class to be used by our CSS file) which determines several CSS options such as font-family
 	 * 
 	 * @return void
@@ -228,7 +234,7 @@ class JSJCodeHighlight {
 		return  $class;
 	}
 
-	/*
+	/**
 	 * Retruns a string with wether this property is true or not. Prepends a string
 	 * 
 	 * @return str
@@ -242,7 +248,7 @@ class JSJCodeHighlight {
 		}
 	}
 
-	/*
+	/**
 	 * Markup for the Options Page
 	 * 
 	 * @return void
@@ -312,6 +318,8 @@ class JSJCodeHighlight {
 					</table>
 				</div>
 
+				<?php do_action( $this->name_space . '/add_admin_options', $this->settings ); ?> 
+
 				<!-- Submit -->
 				<?php submit_button(); ?>
 
@@ -338,16 +346,21 @@ class JSJCodeHighlight {
 </code></pre><br/>
 			</div>
 
+			<?php do_action( $this->name_space . '/add_admin_formatting', $this->settings ); ?>
+
 			<!-- Credit and Links -->
 			<h3><?php _e('Credit and Links', 'jsj_code_highlight'); ?></h3>
 			<p><?php echo sprintf( __('Plugin by %sJorge Silva-Jetter%s', 'jsj_code_highlight' ), '<a href="http://thejsj.com">', '</a>'); ?></p>
 			<p><?php echo sprintf( __('Built with %sHighlight.js%s', 'jsj_code_highlight' ), '<a href="http://highlightjs.org/">', '</a>'); ?></p>
 			<p><?php echo sprintf( __('Unashamedly inspired by  %sOctopress%s', 'jsj_code_highlight' ), '<a href="http://octopress.org/">', '</a>'); ?></p>
+
+			<?php do_action( $this->name_space . '/add_admin_credits', $this->settings ); ?> 
+
 		</div>
 		<?php
 	}
 
-	/*
+	/**
 	 * Get a specific admin color user user preferences and the WP array of colors
 	 *
 	 * @return string
@@ -366,7 +379,7 @@ class JSJCodeHighlight {
 		return '#000'; 
 	}
 
-	/*
+	/**
 	 * Parse a setting into HTML
 	 *
 	 * @return string
