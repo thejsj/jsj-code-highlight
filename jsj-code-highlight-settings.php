@@ -1,5 +1,6 @@
 <?php 
-// Start Setting Options
+
+	// Start Setting Options
 
 	$jsj_code_highlight_options = Array();
 
@@ -14,7 +15,7 @@
 	$jsj_code_highlight_options['font'] = (object) array(
 		'name' => 'font', 
 		'title' => __( 'Code Typeface', 'jsj_code_highlight' ),
-		'descp' => __( 'Select in which typeface you wish to display your code.', 'jsj_code_highlight' ),
+		'descp' => __( 'Select in typeface for code.', 'jsj_code_highlight' ),
 		'type' => 'select',
 		'default' => 'source_code_pro'
 	);

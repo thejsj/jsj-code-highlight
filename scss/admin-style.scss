@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 .jsj_code_highlight {
 
 	/* * * * Code * * * */
@@ -37,6 +39,46 @@
 			border: 3px solid #2ea2cc;
 		}
 	}
+
+	.jsj_code_highlight_other_options {
+
+		table {
+			font-size: 13px; 
+			td {
+				padding: 5px;
+				min-width: 150px;
+			}
+		}
+	}
+
+	.jsj_code_highlight_other_options, .jsj_code_highlight-options_box {
+		max-width: 600px; 
+	}
+
+	.jsj_code_highlight-registration_box {
+		padding: 7px; 
+		margin: 10px 0px; 
+		border: 1px #999 solid; 
+		background: #ddd;
+
+		@include border-radius(3px);
+		h4, p {
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+
+		// &.inactive {
+		// 	background: #fdd;
+		// 	border-color: #f99;
+		// }
+
+		// &.active {
+
+		// }
+		
+		
+	}
+
 
 }
 

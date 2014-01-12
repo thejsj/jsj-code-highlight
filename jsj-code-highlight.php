@@ -36,7 +36,7 @@ class JSJCodeHighlight {
 	private $settings_page_title = 'JSJ Code Highlight Settings';
 
 	// Settings
-	private $settings = Array();
+	private $settings = array();
 	public $all_styles = array(
 		'monokai_sublime'  => array(
 			'name' => 'monokai_sublime', 
@@ -126,8 +126,8 @@ class JSJCodeHighlight {
 		// Include Settings Files
 		require( plugin_dir_path( __FILE__ ) . '/jsj-code-highlight-settings.php');
 
-		// Populate All Options
-		$this->settings = $jsj_code_highlight_options;
+		// Populate All Settings
+		$this->settings = array_merge($this->settings, $jsj_code_highlight_options);
 		
 		// Add Filter To Add More Settings
 		$this->settings = apply_filters( $this->name_space . '/append_settings', $this->settings );
@@ -142,6 +142,9 @@ class JSJCodeHighlight {
 				$this->settings[$key]->value = 0;
 			}
 		}
+
+		// Propogate settings through all add-ons
+		do_action( $this->name_space . '/get_settings', $this->settings ); 
 
 		// Set Options According to Settings
 		$this->theme = $this->all_styles[$this->settings['style']->value];
@@ -323,13 +326,15 @@ class JSJCodeHighlight {
 				<!-- Submit -->
 				<?php submit_button(); ?>
 
+				<!-- Revert to Defaults -->
+				<form name="<?php echo $this->name_space; ?>_default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+	                <input type="hidden" name="<?php echo $this->name_space; ?>_switch_default" value="1">  
+	                <input type="submit" name="Submit" value="<?php _e( 'Reset Settings to Default', 'jsj_code_highlight' ); ?>" class="button" />
+	            </form>
+
 			</form>
 
-			<!-- Revert to Defaults -->
-			<form name="<?php echo $this->name_space; ?>_default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
-                <input type="hidden" name="<?php echo $this->name_space; ?>_switch_default" value="1">  
-                <input type="submit" name="Submit" value="<?php _e( 'Reset Settings to Default', 'jsj_code_highlight' ); ?>" />
-            </form>
+			
 
 			<!-- Instructions on Formatting -->
 			<h3><?php _e('Instructions on Formatting', 'jsj_code_highlight'); ?></h3>
