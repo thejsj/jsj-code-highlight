@@ -290,6 +290,15 @@ class JSJCodeHighlight {
 	 * @return void
 	 */
 	public function options_page(){
+
+		// Get Tab
+		if($_GET && isset($_GET['tab'])){
+			$options_tab = $_GET['tab'];
+		}
+		else{
+			$options_tab = 'settings';
+		}
+
 		// Reset Settings to default if set
 		if($_POST && isset($_POST[$this->name_space . '_switch_default']) && $_POST[$this->name_space . '_switch_default']) { 
 			foreach($this->settings as $key => $setting){
@@ -313,48 +322,83 @@ class JSJCodeHighlight {
 			<!-- Main Title -->
 			<h2 class="<?php echo $this->name_space;?>_title"><?php echo $this->settings_page_title; ?></h2>
 
+			<div id="nav" class="tab-nav">
+				<h2 class="themes-php">
+					<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=settings"><?php _e('Settings', 'jsj_code_highlight' ); ?></a>
+					<?php do_action( $this->name_space . '/add_tab', $this->settings ); ?>
+					<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=how-to-use"><?php _e('How To Use', 'jsj_code_highlight' ); ?></a>
+				</h2>
+			</div>
+
 			<!-- Start Form -->
 			<form method="post" action="options.php" id="<?php echo $this->name_space;?>_styles_container" class="<?php echo $this->name_space;?> <?php echo $this->name_space;?>_form">
 				<?php settings_fields( $this->settings_name_space ); ?>
 
-				<!-- Visual Styles-->
-				<h3><?php _e('Visual Theme', 'jsj_code_highlight'); ?></h3>
-				<div class="<?php echo $this->name_space;?> <?php echo $this->name_space;?>_styles_container">
-					<?php $style_setting = $this->settings['style']; ?>
-					<?php foreach($this->all_styles as $style): ?>
-						<label 
-							class="<?php echo $this->name_space;?>_style_image_container <?php echo $this->name_space;?>_theme_label" 
-							for="<?php echo $style['name']; ?>"
-						>
-							<input 
-								id="<?php echo $style['name']; ?>" 
-								type="radio" 
-								name="<?php echo $style_setting->name_space; ?>" 
-								value="<?php echo $style['name']; ?>" 
-								<?php if ( $style['name'] == $style_setting->value ) echo 'checked="checked"'; ?>
-							/>
-							<img 
-								src="<?php echo plugins_url( 'images/' . $style['name'] . '.png' , __FILE__ ); ?>" 
-								alt="<?php echo $style['title']; ?>" 
-							/>
-							<p><?php echo $style['title']; ?></p>
-						</label>
-					<?php endforeach; ?>
-				</div>
+				<!-- Tab #1 -->
+				<div class="<?php echo $this->name_space; ?>-tab-content <?php echo (($options_tab == 'settings') ? 'active' : 'disabled' );?>">
 
-				<!-- More Options -->
-				<h3><?php _e('Other Options', 'jsj_code_highlight'); ?></h3>
-				<div class='<?php echo $this->name_space;?> <?php echo $this->name_space;?>_other_options'>
-					<table>
-					<?php $this->parse_setting_field($this->settings['font'], $this->all_fonts); ?>
-					<?php $this->parse_setting_field($this->settings['include_additional_styles']); ?>
-					<?php $this->parse_setting_field($this->settings['add_line_numbers']); ?>
-					<?php $this->parse_setting_field($this->settings['tab_replacement']); ?>
-					<?php $this->parse_setting_field($this->settings['tab_number_ratio']); ?>
-					</table>
-				</div>
+					<!-- Visual Styles-->
+					<h3><?php _e('Visual Theme', 'jsj_code_highlight'); ?></h3>
+					<div class="<?php echo $this->name_space;?> <?php echo $this->name_space;?>_styles_container">
+						<?php $style_setting = $this->settings['style']; ?>
+						<?php foreach($this->all_styles as $style): ?>
+							<label 
+								class="<?php echo $this->name_space;?>_style_image_container <?php echo $this->name_space;?>_theme_label" 
+								for="<?php echo $style['name']; ?>"
+							>
+								<input 
+									id="<?php echo $style['name']; ?>" 
+									type="radio" 
+									name="<?php echo $style_setting->name_space; ?>" 
+									value="<?php echo $style['name']; ?>" 
+									<?php if ( $style['name'] == $style_setting->value ) echo 'checked="checked"'; ?>
+								/>
+								<img 
+									src="<?php echo plugins_url( 'images/' . $style['name'] . '.png' , __FILE__ ); ?>" 
+									alt="<?php echo $style['title']; ?>" 
+								/>
+								<p><?php echo $style['title']; ?></p>
+							</label>
+						<?php endforeach; ?>
+					</div>
 
-				<?php do_action( $this->name_space . '/add_admin_options', $this->settings ); ?> 
+					<!-- More Options -->
+					<h3><?php _e('Other Options', 'jsj_code_highlight'); ?></h3>
+					<div class='<?php echo $this->name_space;?> <?php echo $this->name_space;?>_other_options'>
+						<table>
+						<?php $this->parse_setting_field($this->settings['font'], $this->all_fonts); ?>
+						<?php $this->parse_setting_field($this->settings['include_additional_styles']); ?>
+						<?php $this->parse_setting_field($this->settings['add_line_numbers']); ?>
+						<?php $this->parse_setting_field($this->settings['tab_replacement']); ?>
+						<?php $this->parse_setting_field($this->settings['tab_number_ratio']); ?>
+						</table>
+					</div>
+
+				</div><!-- /.tab-content -->
+
+				<?php do_action( $this->name_space . '/add_admin_options', $options_tab ); ?> 
+
+				<!-- Tab #2 -->
+				<div class="<?php echo $this->name_space; ?>-tab-content <?php echo (($options_tab == 'how-to-use') ? 'active' : 'disabled' );?>">
+
+					<!-- Instructions on Formatting -->
+					<h3><?php _e('Instructions on Formatting', 'jsj_code_highlight'); ?></h3>
+					<div class='<?php echo $this->name_space;?> <?php echo $this->name_space;?>_instructions'>
+						<p><?php _e('Make sure you add all your code in the following format:', 'jsj_code_highlight'); ?></p>
+						<p><?php _e('1. Put a <strong>&lt;pre&gt;</strong> tag before and after all your code snippets.', 'jsj_code_highlight'); ?><p>
+						<p><?php _e('2. Put a <strong>&lt;code&gt;</strong> tag inside of those <strong>&lt;pre&gt;</strong> tags.', 'jsj_code_highlight'); ?><p>
+						<p><?php _e('3. Add a class with the desired language to your <strong>&lt;code&gt;</strong> tag.', 'jsj_code_highlight'); ?><p>
+<pre><code class='html'>&lt;pre&gt;
+    &lt;code class='javascript'&gt;
+        console.log('<?php _e('Hello World', 'jsj_code_highlight'); ?>');
+    &lt;/code&gt;
+&lt;/pre&gt;
+</code></pre><br/>
+					</div>
+				
+				</div><!-- /.tab-content -->
+
+			<?php do_action( $this->name_space . '/add_admin_formatting', $this->settings ); ?>
 
 				<!-- Submit -->
 				<?php submit_button(); ?>
@@ -367,32 +411,25 @@ class JSJCodeHighlight {
 
 			</form>
 
-			
+			<h4><?php _e('Resources', 'jsj_code_highlight' ); ?></h4>
+            <ul>
+            	<?php // TODO : Add How To link ?>
+            	<li><?php echo sprintf( __('%sHow To Use This Plugin%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">' , '</a>'); ?></li>
+            	<?php // TODO : Add Survey link ?>
+            	<li><?php echo sprintf( __('%sProvide Feedback%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">','</a>'); ?></li>
+            	<li><?php echo sprintf( __('%sReview This Plugin%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">','</a>'); ?></li>
+            	<?php // TODO : Add Plugin Website ?>
+            	<li><?php echo sprintf( __('%sVisit Plugin Website%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">', '</a>'); ?></li>
+            	<?php // TODO : Add JSJ Plugins url ?>
+            	<li><?php echo sprintf( __('%sSee All JSJ Plugins%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">','</a>'); ?></li>
+			</ul>
 
-			<!-- Instructions on Formatting -->
-			<h3><?php _e('Instructions on Formatting', 'jsj_code_highlight'); ?></h3>
-			<div class='<?php echo $this->name_space;?> <?php echo $this->name_space;?>_instructions'>
-				<p><?php _e('Make sure you add all your code in the following format:', 'jsj_code_highlight'); ?></p>
-				<p><?php _e('1. Put a <strong>&lt;pre&gt;</strong> tag before and after all your code snippets.', 'jsj_code_highlight'); ?><p>
-				<p><?php _e('2. Put a <strong>&lt;code&gt;</strong> tag inside of those <strong>&lt;pre&gt;</strong> tags.', 'jsj_code_highlight'); ?><p>
-				<p><?php _e('3. Add a class with the desired language to your <strong>&lt;code&gt;</strong> tag.', 'jsj_code_highlight'); ?><p>
-<pre><code class='html'>&lt;pre&gt;
-    &lt;code class='javascript'&gt;
-        console.log('<?php _e('Hello World', 'jsj_code_highlight'); ?>');
-    &lt;/code&gt;
-&lt;/pre&gt;
-</code></pre><br/>
-			</div>
-
-			<?php do_action( $this->name_space . '/add_admin_formatting', $this->settings ); ?>
-
-			<!-- Credit and Links -->
-			<h3><?php _e('Credit and Links', 'jsj_code_highlight'); ?></h3>
-			<p><?php echo sprintf( __('Plugin by %sJorge Silva-Jetter%s', 'jsj_code_highlight' ), '<a href="http://thejsj.com">', '</a>'); ?></p>
-			<p><?php echo sprintf( __('Built with %sHighlight.js%s', 'jsj_code_highlight' ), '<a href="http://highlightjs.org/">', '</a>'); ?></p>
-			<p><?php echo sprintf( __('Unashamedly inspired by  %sOctopress%s', 'jsj_code_highlight' ), '<a href="http://octopress.org/">', '</a>'); ?></p>
-
-			<?php do_action( $this->name_space . '/add_admin_credits', $this->settings ); ?> 
+            <h4><?php _e('Credit', 'jsj_code_highlight' ); ?></h4>
+            <ul>
+            	<li><?php echo sprintf( __('Plugin by  %s', 'jsj_code_highlight' ), '<a href="http://thejsj.com" target="_blank">Jorge Silva-Jetter</a>'); ?></li>
+            	<li><?php echo sprintf( __('Built with %sHighlight.js%s', 'jsj_code_highlight' ), '<a href="http://highlightjs.org/" target="_blank">' , '</a>'); ?></li>
+            	<li><?php echo sprintf( __('Inspired by %sOctopress%s', 'jsj_code_highlight' ), '<a href="http://octopress.org/" target="_blank">', '</a>'); ?></li>
+			</ul>
 
 		</div>
 		<?php

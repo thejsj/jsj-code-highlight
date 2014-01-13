@@ -66,17 +66,22 @@
 			margin-top: 5px;
 			margin-bottom: 5px;
 		}
-
-		// &.inactive {
-		// 	background: #fdd;
-		// 	border-color: #f99;
-		// }
-
-		// &.active {
-
-		// }
 		
-		
+	}
+
+	.tab-nav {
+		h2 {
+			border-bottom: 1px #ccc solid; 
+		}
+		.nav-tab {
+			background: none; 
+		}
+	}
+
+	.jsj_code_highlight-tab-content {
+		&.disabled {
+			display: none;
+		}
 	}
 
 
