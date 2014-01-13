@@ -1,8 +1,8 @@
 .jsj_code_highlight-container.jsj_code_highlight-table_container {
 	overflow-y: hidden;
 	overflow-x: auto;
-	margin-bottom: 1.5em;
-	@include border-radius(3px);
+	margin-bottom: $container_margin_bottom;
+	@include border-radius($container_border_radius);
 
 	table {
 
@@ -11,9 +11,9 @@
 		border-spacing: 0;
 		margin: 0;
 		vertical-align: baseline;
-		padding: 0.75em;
-		font-size: 0.87em;
-		line-height: 1.2em; 
+		padding: $pre_padding;
+		font-size: $pre_font_size;
+		line-height: $pre_line_height; 
 
 		pre  {
 			padding: 0;
@@ -25,12 +25,12 @@
 			white-space: pre;
 			word-wrap: normal; 
 			code {
-				border: 0px;
+				border: 0;
 				background: none;
 				overflow: auto;
 				overflow-y: hidden;
 				display: block;
-				padding: .8em;
+				padding: $code_padding;
 			}
 		}
 		td,
@@ -60,7 +60,8 @@
 			pre {
 				display: inline-block;
 				overflow: hidden;
-				padding: 0.75em;
+				padding: $pre_padding;
+				padding-top: $pre_padding_top; 
 			}
 		}
 	}

@@ -135,11 +135,21 @@ class JSJCodeHighlight {
 		foreach($this->settings as $key => $setting){
 			// Set Setting Name Space
 			$this->settings[$key]->name_space = $this->name_space . '-' . $setting->name;
-
+		}
+		foreach($this->settings as $key => $setting){
 			// Get Value
 			$this->settings[$key]->value = get_option($setting->name_space , $setting->default);
+			// Perform Data checks
 			if($this->settings[$key]->value == ''){
 				$this->settings[$key]->value = 0;
+			}
+			// If Boolean, conver to boolean
+			if($this->settings[$key]->value == false && $setting->type == 'boolean'){
+				$this->settings[$key]->value = 0; // Convert boolean to int
+			}	
+			// If numberic value, convert to int
+			if(is_numeric($this->settings[$key]->value) && ($setting->type == 'boolean' || $setting->type == 'number')){
+				$this->settings[$key]->value = intval($this->settings[$key]->value); // Convert boolean to int
 			}
 		}
 
@@ -182,13 +192,36 @@ class JSJCodeHighlight {
 		}
 		// Enqueue Highlight.js
 		wp_enqueue_script(
-			'highlightPack',
-			// plugins_url( 'js/highlight.pack.js' , __FILE__ ),
-			plugins_url( 'js/highlight.min.js' , __FILE__ ),
+			'jsjCodeHighlight-Highlight',
+			plugins_url( 'js/jsj-code-highlight.js' , __FILE__ ),
 			array('jquery'), // Deps
 			"", // Version
 			true //
 		);
+
+		// Parse Settings For Javascript
+		$javascript_settings = (object) array();
+		// Get Valid Options
+		$pass_to_javascript_valid = array('add_line_numbers', 'tab_replacement', 'tab_number_ratio');
+		foreach($this->settings as $key => $setting){
+			foreach($pass_to_javascript_valid as $setting_key){
+				if($key == $setting_key){
+					$javascript_settings->{$key} = $setting->value;
+					break; 
+				}
+			}
+		}
+
+		// Localize Settings
+		wp_localize_script( 
+			'jsjCodeHighlight-Highlight', 
+			'jsjCodeHighlightOptions', 
+			array(
+				'settings' => $javascript_settings,
+				'name_space' => $this->name_space,
+			) 
+		);
+
 		// Only enqueue the style file we need
 		wp_enqueue_style(
 			$this->name_space . '-' . $this->theme['name'] . "_theme", 
@@ -421,56 +454,5 @@ class JSJCodeHighlight {
 		</tr>
 		<?php
 	}
-
-	public function footer_actions(){  ?>
-		<?php if($this->settings['add_line_numbers']->value): ?>
-		<!-- Add Line Numbers -->
-		<script>
-			(function($){
-				var $pre = $('pre')
-				// Add class to all <pre>
-				$pre.addClass('<?php echo $this->name_space; ?>');
-				$pre.each(function(i){
-					$this = $(this);
-					// Wrap all lines around <span>
-					var new_html = '', line_numbers_html = '', template;
-					var old_html = $this.children('code').html(); 
-					var code_class = $this.children('code').attr('class');
-					var lines = old_html.match(/[^\n\r]+/g);
-					for(var i = 0; i < lines.length; i++){
-						var index = i + 1;
-						// Add line number
-						line_numbers_html += '<span class="line-number">' + index + '</span>\n';
-						// Add Html
-						new_html += '<span class="line">' + lines[i] + '</span>\n';
-					}
-					$this.children('code').html(new_html);
-					// Add Containers (Ugly template, right? ...not worth including a library just for this, though)
-					template = '<div  class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-container <?php echo $this->name_space; ?>-table_container">\
-<table>\
-		<tbody>\
-			<tr>\
-				<td class="gutter"><pre class="line-numbers">' + line_numbers_html + '</pre></td>\
-				<td class="code"><pre><code class="' + code_class + '">' + new_html + '</code></pre></td>\
-			</tr>\
-		</tbody>\
-	</table>\
-</div>';
-					// Re-Append
-					$this.replaceWith(template);
-				});
-			})(jQuery);
-		</script>
-		<?php endif; ?>
-
-		<!-- Call Highlight JS -->
-		<script>
-		<?php if($this->settings['tab_replacement']->value): ?>
-		console.log('Replacement --<?php echo str_repeat(" ", $this->settings['tab_number_ratio']->value); ?>--');
-		hljs.configure({tabReplace: '<?php echo str_repeat(" ", $this->settings['tab_number_ratio']->value); ?>'});
-		<?php endif; ?>
-		hljs.initHighlightingOnLoad();
-		</script>
-	<?php }
 }
 ?>

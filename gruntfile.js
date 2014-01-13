@@ -3,14 +3,16 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
-		// uglify: {
-		// 	my_target: {
-		// 		files: {
-		// 			'js/header.js': ['js/libs/Modernizr-2.7.1.js'],
-		// 			'js/footer.js': ['js/libs/jquery-1.10.2.js', 'js/libs/bootstrap/bootstrap.js','js/app/app.js'],
-		// 		}
-		// 	}
-		// },
+		uglify: {
+			my_target: {
+				files: {
+					'js/jsj-code-highlight.js': [
+						'js/libs/highlight.min.js', 
+						'js/app/app.js',
+					],
+				}
+			}
+		},
 		compass: {
 			dist: {
 				options: {
@@ -21,8 +23,8 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			css: {
-				files: ['**/*.scss'],
-				tasks: ['compass'],
+				files: ['**/*.scss', '**/*.js'],
+				tasks: ['compass', 'uglify'],
 			}
 		},	
 	});
@@ -33,6 +35,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task(s).
-	grunt.registerTask('default', ['compass']);
+	grunt.registerTask('default', ['compass' ,'uglify']);
 
 };

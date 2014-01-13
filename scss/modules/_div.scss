@@ -1,0 +1,29 @@
+.jsj_code_highlight-container.jsj_code_highlight-div_container {
+
+	overflow-y: hidden;
+	overflow-x: auto;
+	margin-bottom: $container_margin_bottom;
+	@include border-radius($container_border_radius);
+
+	pre  {
+		padding: 0;
+		border: 0;
+		margin: 0;
+		background: none;
+		overflow: auto;
+		vertical-align: baseline;
+		white-space: pre;
+		word-wrap: normal; 
+		padding: $pre_padding;
+		font-size: $pre_font_size;
+		line-height: $pre_line_height; 
+		code {
+			border: 0;
+			background: none;
+			overflow: auto;
+			overflow-y: hidden;
+			display: block;
+			padding: 0 ($code_padding/2);
+		}
+	}
+}
