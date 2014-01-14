@@ -8,22 +8,12 @@
 
 Plugin Name: JSJ Code Hightlight
 Plugin URI: http://thejsj.com
-Description: This plugin Blabh blah blah
+Description: Automatically turn all your code into beautifully formatted snippets.
 Author: Jorge Silva Jetter
-Version: 0.1
+Version: 1.0
 Author URI: http://thejsj.com
 
  * * * * * * * * */
-
-/* 
-
-TODO : If Line Number are not being included, add correct classes to DOM. 
-
-TODO : Add CSS for no line numbers
-
-TODO : Add Credits ... anything else? 
-
-*/
 
 $jsj_code_highlight = new JSJCodeHighlight();
 
@@ -410,19 +400,6 @@ class JSJCodeHighlight {
 	            </form>
 
 			</form>
-
-			<h4><?php _e('Resources', 'jsj_code_highlight' ); ?></h4>
-            <ul>
-            	<?php // TODO : Add How To link ?>
-            	<li><?php echo sprintf( __('%sHow To Use This Plugin%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">' , '</a>'); ?></li>
-            	<?php // TODO : Add Survey link ?>
-            	<li><?php echo sprintf( __('%sProvide Feedback%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">','</a>'); ?></li>
-            	<li><?php echo sprintf( __('%sReview This Plugin%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">','</a>'); ?></li>
-            	<?php // TODO : Add Plugin Website ?>
-            	<li><?php echo sprintf( __('%sVisit Plugin Website%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">', '</a>'); ?></li>
-            	<?php // TODO : Add JSJ Plugins url ?>
-            	<li><?php echo sprintf( __('%sSee All JSJ Plugins%s', 'jsj_code_highlight' ), '<a href="#" target="_blank">','</a>'); ?></li>
-			</ul>
 
             <h4><?php _e('Credit', 'jsj_code_highlight' ); ?></h4>
             <ul>

@@ -2,7 +2,7 @@
 
 Contributors: jorge.silva
 Donate link: 
-Tags: code, highlight, syntax, highlighter, prettify, highlighting, markup, formatting, snippet, color, source
+Tags: code, highlight, syntax, highlighter, prettify, highlighting, markup, formatting, snippet, color, source, jsj
 Requires at least: 3.4
 Tested up to: 3.8
 Stable tag: 1.0
@@ -33,7 +33,7 @@ Inpsired by [Octopress](http://octopress.org/)
 
 == Installation ==
 
-1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory.
+1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory or simply use the Plugin upload interface in the admin.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your code snippets will be automatically converted into JSJ Code Highlight blocks. 
 3. Optional: If you want to change any of the options for the plugin, go to Settings -> JSJ Code Highlight.
 
@@ -45,7 +45,12 @@ If you have any feedback or suggestions, email me at jorge dot silva at thejsj d
 
 == Screenshots ==
 
-
+1. Monakai Sublime. 1 of 4 avialable themes.
+2. Solarized Dark. 1 of 4 avialable themes.
+3. Github. 1 of 4 avialable themes.
+4. Tommorow. 1 of 4 avialable themes.
+5. You can also remove line number and additional CSS for a more simple look or for writing your own CSS.
+6. Admin interface
 
 == Changelog ==  
 
@@ -59,13 +64,7 @@ Hooks for add-ons and other plugins.
 == Upgrade notice ==
 
 = 1.0 =
-First Version. 
-
-== Online Examples ==
-
-You can see some online examples here:
-
-1. 
+First Version. Enjoy!
 
 == Available Options ==
 
