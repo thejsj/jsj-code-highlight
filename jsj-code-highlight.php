@@ -1,19 +1,14 @@
 <?php
-/**
- * @package JSJ_Code_Highlight
- * @version 0.1
- */
-
-/* * * * * * * * *
+/* 
 
 Plugin Name: JSJ Code Hightlight
 Plugin URI: http://thejsj.com
 Description: Automatically turn all your code into beautifully formatted snippets.
 Author: Jorge Silva Jetter
-Version: 1.0
+Version: 1.0.1
 Author URI: http://thejsj.com
 
- * * * * * * * * */
+*/
 
 $jsj_code_highlight = new JSJCodeHighlight();
 

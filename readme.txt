@@ -1,11 +1,11 @@
-= JSJ Code Highlight =
+=== JSJ Code Highlight ===
 
 Contributors: jorge.silva
-Donate link: 
+Donate link: http://thejsj.com
 Tags: code, highlight, syntax, highlighter, prettify, highlighting, markup, formatting, snippet, color, source, jsj
 Requires at least: 3.4
 Tested up to: 3.8
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

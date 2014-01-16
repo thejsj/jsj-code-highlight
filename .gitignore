@@ -21,3 +21,7 @@ Thumbs.db
 # Ignore Node Modules
 node_modules
 node_modules/*
+
+# Ignore Build
+build
+build/*
