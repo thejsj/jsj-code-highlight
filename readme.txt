@@ -4,8 +4,8 @@ Contributors: jorge.silva
 Donate link: http://thejsj.com
 Tags: code, highlight, syntax, highlighter, prettify, highlighting, markup, formatting, snippet, color, source, jsj
 Requires at least: 3.4
-Tested up to: 3.8
-Stable tag: 1.0.1
+Tested up to: 3.8.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,10 +61,16 @@ Basic syntax highlighting
 Option for various fonts
 Hooks for add-ons and other plugins.
 
+= 1.0.2 = 
+Fixing minor extra action in plugin
+
 == Upgrade notice ==
 
 = 1.0 =
 First Version. Enjoy!
+
+= 1.0.1 = 
+Minor update. Update and enjoy!
 
 == Available Options ==
 

@@ -5,7 +5,7 @@ Plugin Name: JSJ Code Hightlight
 Plugin URI: http://thejsj.com
 Description: Automatically turn all your code into beautifully formatted snippets.
 Author: Jorge Silva Jetter
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://thejsj.com
 
 */
@@ -92,9 +92,6 @@ class JSJCodeHighlight {
 
 		// Hook for adding admin menus
 		add_action('admin_menu',  array($this, 'add_menu_page'));
-
-		// Add JS code to the Footer   
-		add_action('wp_footer', array($this, 'footer_actions'), 30); //Enqueued scripts are executed at priority level 20.\
 
 		// Add Body Class For Several User Settings
 		add_filter('body_class',array($this, 'body_class'));
